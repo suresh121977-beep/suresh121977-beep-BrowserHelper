@@ -10,10 +10,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: ./BrowserHelper
-
     steps:
     - name: Checkout project
       uses: actions/checkout@v4
@@ -26,10 +22,11 @@ jobs:
         cache: gradle
 
     - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      run: chmod +x BrowserHelper/gradlew
 
     - name: Build APK with Gradle
       run: ./gradlew assembleDebug
+      working-directory: ./BrowserHelper
 
     - name: Upload APK artifact
       uses: actions/upload-artifact@v4
